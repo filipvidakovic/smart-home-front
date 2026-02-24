@@ -1,0 +1,60 @@
+/* PeopleCounter.css */
+
+.people-counter {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 3px solid #9f7aea;
+  text-align: center;
+}
+
+.people-counter h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  color: #2d3748;
+}
+
+.counter-display {
+  margin-bottom: 15px;
+}
+
+.counter-value {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #9f7aea;
+  display: inline-block;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%);
+  border-radius: 20px;
+  min-width: 150px;
+  transition: all 0.3s;
+}
+
+.counter-value:hover {
+  transform: scale(1.05);
+}
+
+.counter-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4a5568;
+  padding: 10px 20px;
+  background: rgba(159, 122, 234, 0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.counter-status .empty {
+  color: #ed8936;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,174 @@
+/* SecurityPanel.css */
+
+.security-panel {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.security-panel.armed {
+  border-color: #f56565;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+}
+
+.security-panel.disarmed {
+  border-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+}
+
+.security-panel.alarm {
+  animation: alarm-flash 1s infinite;
+  border-color: #e53e3e;
+}
+
+@keyframes alarm-flash {
+  0%, 100% {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #feb2b2 0%, #ffffff 100%);
+  }
+}
+
+.security-panel h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  color: #2d3748;
+  text-align: center;
+}
+
+.security-status {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.status-indicator {
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.status-indicator.armed {
+  background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+  color: white;
+  box-shadow: 0 5px 15px rgba(245, 101, 101, 0.4);
+}
+
+.status-indicator.disarmed {
+  background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+  color: white;
+  box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+}
+
+.pin-input {
+  margin-bottom: 20px;
+}
+
+.pin-input input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s;
+  letter-spacing: 8px;
+  font-weight: 600;
+}
+
+.pin-input input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.pin-input input:disabled {
+  background: #f7fafc;
+  cursor: not-allowed;
+}
+
+.security-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.security-actions button {
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-arm {
+  background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
+}
+
+.btn-arm:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 101, 101, 0.4);
+}
+
+.btn-disarm {
+  background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+}
+
+.btn-disarm:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+}
+
+.btn-clear-alarm {
+  background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(237, 137, 54, 0.3);
+  animation: pulse-button 2s infinite;
+}
+
+@keyframes pulse-button {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.btn-clear-alarm:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(237, 137, 54, 0.4);
+}
+
+.security-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.security-message {
+  margin-top: 15px;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
