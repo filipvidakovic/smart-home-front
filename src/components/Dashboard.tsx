@@ -24,8 +24,7 @@ const Dashboard: React.FC = () => {
         api.getAllDevices(),
         api.getStats()
       ]);
-      console.log('API response - System State:', stateData);
-
+      
       setSystemState(stateData);
       console.log('Fetched system state:', stateData);
       setDevices(devicesData);
