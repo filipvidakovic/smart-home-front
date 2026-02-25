@@ -18,15 +18,20 @@ const Dashboard: React.FC = () => {
 
   const fetchData = async () => {
     try {
+
       const [stateData, devicesData, statsData] = await Promise.all([
         api.getSystemState(),
         api.getAllDevices(),
         api.getStats()
       ]);
+      console.log('API response - System State:', stateData);
 
       setSystemState(stateData);
+      console.log('Fetched system state:', stateData);
       setDevices(devicesData);
+      console.log('Fetched devices:', devicesData);
       setStats(statsData);
+      console.log('Fetched stats:', statsData);
       setError(null);
     } catch (err) {
       setError('Failed to fetch data');
@@ -124,8 +129,20 @@ const Dashboard: React.FC = () => {
         <h2>📊 Grafana Visualizations</h2>
         <div className="grafana-iframe-container">
           <iframe
-            src="http://localhost:3000/d/iot-complete-dashboard?orgId=1&refresh=5s&kiosk"
+            src="http://localhost:3000/d/InfluxDB-IoT/complete-iot-sensor-dashboard?orgId=1&from=now-15m&to=now&timezone=browser&refresh=5s"
             title="Grafana Dashboard"
+            className="grafana-iframe"
+          />
+        </div>
+      </div>
+
+      <div className="grafana-section">
+        <h2> Camera</h2>
+        <div className="grafana-iframe-container">
+          <iframe
+            // TODO Dodaj url kamere sa PIja
+            src="https://www.youtube.com/embed?v=2BLqhS59Elc"
+            title="Camera"
             className="grafana-iframe"
           />
         </div>
