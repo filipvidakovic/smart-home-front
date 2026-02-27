@@ -40,6 +40,11 @@ class ApiService {
     return response.data;
   }
 
+  async getLCDDisplay() {
+    const response = await axios.get(`${this.baseURL}/lcd/display`);
+    return response.data;
+  }
+
   async setTimer(seconds: number) {
     const response = await axios.post(`${this.baseURL}/timer/set`, { seconds });
     return response.data;

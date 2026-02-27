@@ -40,6 +40,32 @@ export interface SensorStats {
   button?: number;
 }
 
+interface DHTPair {
+  temperature: number | null;
+  humidity: number | null;
+  location: string;
+}
+
+interface LCDDeviceData {
+  device_id: string;
+  location: string;
+  last_updated: string | null;
+}
+
+interface PI3LCD extends LCDDeviceData {
+  dht1: DHTPair;
+  dht2: DHTPair;
+}
+
+interface PI2LCD extends LCDDeviceData {
+  dht3: DHTPair;
+}
+
+export interface LCDDisplayData {
+  PI3: PI3LCD;
+  PI2: PI2LCD;
+}
+
 export interface DeviceStatus {
   device_id: string;
   device_name: string;
