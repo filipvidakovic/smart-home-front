@@ -8,6 +8,7 @@ import TimerControl from './TimerControl';
 import PeopleCounter from './PeopleCounter';
 import AlarmIndicator from './AlarmIndicator';
 import LCDDisplay from './LCDDisplay';
+import IRController from './IRController';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -94,6 +95,7 @@ const Dashboard: React.FC = () => {
               running={systemState.timer_running}
               expired={systemState.timer_expired}
             />
+            <IRController />
           </div>
 
           <SystemStatus 
