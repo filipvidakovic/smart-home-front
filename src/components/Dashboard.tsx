@@ -7,6 +7,8 @@ import SecurityPanel from './SecurityPanel';
 import TimerControl from './TimerControl';
 import PeopleCounter from './PeopleCounter';
 import AlarmIndicator from './AlarmIndicator';
+import LCDDisplay from './LCDDisplay';
+import IRController from './IRController';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -93,6 +95,7 @@ const Dashboard: React.FC = () => {
               running={systemState.timer_running}
               expired={systemState.timer_expired}
             />
+            <IRController />
           </div>
 
           <SystemStatus 
@@ -104,6 +107,7 @@ const Dashboard: React.FC = () => {
 
       <div className="sensors-grid">
         <h2>Sensor Readings</h2>
+        <LCDDisplay />
         <div className="sensors-container">
           {devices.map(device => (
             <div key={device.device_id} className="device-section">

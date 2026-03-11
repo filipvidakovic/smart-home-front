@@ -1,0 +1,191 @@
+.lcd-display {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 3px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.lcd-display.loading,
+.lcd-display.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  color: #888;
+  font-size: 14px;
+}
+
+.lcd-display.error {
+  color: #ff6b6b;
+}
+
+.lcd-header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.lcd-header h3 {
+  margin: 0;
+  color: #4a9eff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.lcd-screen {
+  background: #000;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-family: 'Courier New', monospace;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lcd-line {
+  color: #00ff41;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-shadow: 0 0 4px rgba(0, 255, 65, 0.3);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lcd-line1 {
+  text-transform: uppercase;
+}
+
+.lcd-line2 {
+  font-size: 14px;
+}
+
+.lcd-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.indicator {
+  color: #4a9eff;
+  font-size: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.lcd-data {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sensor-box {
+  background: rgba(74, 158, 255, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+.sensor-box.dht1 {
+  border-left: 3px solid #ff6b6b;
+}
+
+.sensor-box.dht2 {
+  border-left: 3px solid #4ecdc4;
+}
+
+.sensor-box.dht3 {
+  border-left: 3px solid #ffa500;
+}
+
+.sensor-box h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sensor-box p {
+  margin: 4px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4a9eff;
+}
+
+.sensor-box.dht1 p {
+  color: #ff8a8a;
+}
+
+.sensor-box.dht2 p {
+  color: #5ee6d8;
+}
+
+.sensor-box.dht3 p {
+  color: #ffb84d;
+}
+
+.lcd-footer {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.timestamp {
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+}
+
+.lcd-timestamp {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .lcd-data {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .lcd-display {
+    padding: 15px;
+  }
+
+  .lcd-data {
+    grid-template-columns: 1fr;
+  }
+
+  .lcd-line {
+    font-size: 14px;
+  }
+
+  .lcd-line2 {
+    font-size: 12px;
+  }
+
+  .sensor-box p {
+    font-size: 12px;
+  }
+
+  .lcd-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

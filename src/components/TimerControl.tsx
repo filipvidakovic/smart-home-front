@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import './TimerControl.css';
 
@@ -13,12 +13,71 @@ const TimerControl: React.FC<TimerControlProps> = ({ seconds, running, expired }
   const [inputSeconds, setInputSeconds] = useState(0);
   const [buttonSeconds, setButtonSeconds] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [baseSeconds, setBaseSeconds] = useState(seconds);
 
   const formatTime = (totalSeconds: number): string => {
-    const mins = Math.floor(totalSeconds / 60);
-    const secs = totalSeconds % 60;
+    const safeSeconds = Number.isFinite(totalSeconds) ? Math.max(0, totalSeconds) : 0;
+    const mins = Math.floor(safeSeconds / 60);
+    const secs = Math.floor(safeSeconds % 60);
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
+
+  // When timer starts, capture the start time
+  useEffect(() => {
+    if (running && startTime === null) {
+      setStartTime(Date.now());
+      setBaseSeconds(seconds);
+    } else if (!running && startTime !== null) {
+      setStartTime(null);
+    }
+  }, [running, startTime, seconds]);
+
+  // When server updates seconds (user set/add), update base
+  useEffect(() => {
+    if (!running) {
+      setBaseSeconds(seconds);
+    }
+  }, [seconds, running]);
+
+  // Calculate display value based on elapsed time
+  const getDisplaySeconds = (): number => {
+    if (!running || startTime === null) {
+      return baseSeconds;
+    }
+    const elapsed = (Date.now() - startTime) / 1000;
+    return Math.max(0, baseSeconds - elapsed);
+  };
+
+  const [displaySeconds, setDisplaySeconds] = useState(getDisplaySeconds());
+
+  // Local countdown timer
+  useEffect(() => {
+    if (!running) {
+      setDisplaySeconds(baseSeconds);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setDisplaySeconds(getDisplaySeconds());
+    }, 50); // Update every 50ms for smooth countdown
+
+    return () => clearInterval(interval);
+  }, [running, baseSeconds, startTime]);
+
+  useEffect(() => {
+    const loadButtonSeconds = async () => {
+      try {
+        const seconds = await api.getTimerButtonSeconds();
+        if (Number.isFinite(seconds)) {
+          setButtonSeconds(seconds);
+        }
+      } catch (error) {
+        console.error('Failed to load button seconds:', error);
+      }
+    };
+    loadButtonSeconds();
+  }, []);
 
   const handleSetTimer = async () => {
     const totalSeconds = inputMinutes * 60 + inputSeconds;
@@ -83,7 +142,7 @@ const TimerControl: React.FC<TimerControlProps> = ({ seconds, running, expired }
       <h3>⏱️ Kitchen Timer</h3>
       
       <div className={`timer-display ${expired ? 'blinking' : ''}`}>
-        {formatTime(seconds)}
+        {formatTime(displaySeconds)}
       </div>
 
       {expired && (

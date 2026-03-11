@@ -40,6 +40,11 @@ class ApiService {
     return response.data;
   }
 
+  async getLCDDisplay() {
+    const response = await axios.get(`${this.baseURL}/lcd/display`);
+    return response.data;
+  }
+
   async setTimer(seconds: number) {
     const response = await axios.post(`${this.baseURL}/timer/set`, { seconds });
     return response.data;
@@ -82,6 +87,19 @@ class ApiService {
 
   async setTimerButtonSeconds(seconds: number) {
     const response = await axios.post(`${this.baseURL}/timer/button-seconds`, { seconds });
+    return response.data;
+  }
+
+  async controlIR(command: string, device: string = 'brgb') {
+    const response = await axios.post(`${this.baseURL}/ir/control`, { 
+      device, 
+      command 
+    });
+    return response.data;
+  }
+
+  async getIRDevices() {
+    const response = await axios.get(`${this.baseURL}/ir/devices`);
     return response.data;
   }
 }
