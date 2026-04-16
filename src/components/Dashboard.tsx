@@ -10,6 +10,7 @@ import AlarmIndicator from './AlarmIndicator';
 import LCDDisplay from './LCDDisplay';
 import IRController from './IRController';
 import './Dashboard.css';
+import LEDIndicator from './LEDIndicator';
 
 const Dashboard: React.FC = () => {
   const [systemState, setSystemState] = useState<SystemState | null>(null);
@@ -96,6 +97,23 @@ const Dashboard: React.FC = () => {
               expired={systemState.timer_expired}
             />
             <IRController />
+                      <div className="led-states-section">
+            <h2>💡 LED Status</h2>
+            <div className="led-states-grid">
+            {Object.entries(systemState.door_states).map(([doorId, state]) => (
+              <div key={doorId} className={`door-state ${state.open ? 'open' : 'closed'}`}>
+
+              <LEDIndicator
+                  key={doorId}
+                  ledId={doorId}
+                  isOn={systemState.door_states[doorId]?.open || false} 
+                  label={`${doorId} LED`}
+                  lastChanged={null}
+                />
+              </div>
+            ))}
+            </div>
+          </div>
           </div>
 
           <SystemStatus 

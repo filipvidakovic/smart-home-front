@@ -1,0 +1,137 @@
+/* LEDIndicator.css */
+
+.led-indicator {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.led-indicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* LED Bulb Visual */
+.led-bulb {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.led-core {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.led-glow {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* LED OFF State */
+.led-indicator.led-off .led-core {
+  background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+  border: 2px solid #718096;
+}
+
+.led-indicator.led-off .led-glow {
+  opacity: 0;
+}
+
+.led-indicator.led-off .led-status {
+  color: #718096;
+}
+
+/* LED ON State */
+.led-indicator.led-on .led-core {
+  background: linear-gradient(135deg, #fef5e7 0%, #ffd93d 100%);
+  border: 2px solid #f6ad55;
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 217, 61, 0.5),
+    0 0 20px rgba(255, 217, 61, 0.6);
+}
+
+.led-indicator.led-on .led-glow {
+  background: radial-gradient(circle, rgba(255, 217, 61, 0.4) 0%, transparent 70%);
+  opacity: 1;
+  animation: led-pulse 2s ease-in-out infinite;
+}
+
+.led-indicator.led-on .led-status {
+  color: #f6ad55;
+  font-weight: 700;
+}
+
+@keyframes led-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* LED Info */
+.led-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.led-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.led-status {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.led-time {
+  font-size: 0.75rem;
+  color: #a0aec0;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .led-indicator {
+    padding: 12px 15px;
+  }
+
+  .led-bulb {
+    width: 40px;
+    height: 40px;
+  }
+
+  .led-core {
+    width: 24px;
+    height: 24px;
+  }
+
+  .led-glow {
+    width: 40px;
+    height: 40px;
+  }
+}

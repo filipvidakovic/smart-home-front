@@ -8,6 +8,7 @@ interface SystemStatusProps {
 }
 
 const SystemStatus: React.FC<SystemStatusProps> = ({ systemState, devices }) => {
+  console.log("Door states:"+systemState.door_states);
   return (
     <div className="system-status">
       <h2>System Status</h2>

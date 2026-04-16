@@ -29,6 +29,12 @@ export interface SystemState {
       open_since: number | null;
     };
   };
+  led_states: {
+    [key: string]: {
+      on: boolean;
+      last_changed: number | null;
+    };
+  };
 }
 
 export interface SensorStats {
