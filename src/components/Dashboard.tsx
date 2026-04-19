@@ -161,8 +161,8 @@ const Dashboard: React.FC = () => {
         <h2> Camera</h2>
         <div className="grafana-iframe-container">
           <iframe
-            // TODO Dodaj url kamere sa PIja
-            src="https://www.youtube.com/embed?v=2BLqhS59Elc"
+            // TODO Promeni ADRESU 
+            src="http://192.168.107.146:8080/?action=stream"
             title="Camera"
             className="grafana-iframe"
           />
