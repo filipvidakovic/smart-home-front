@@ -98,6 +98,14 @@ class ApiService {
     return response.data;
   }
 
+  async controlLamp(command: 'on' | 'off' | 'set_color', color: string = 'white') {
+    const response = await axios.post(`${this.baseURL}/lamp/control`, {
+      command,
+      color
+    });
+    return response.data;
+  }
+
   async getIRDevices() {
     const response = await axios.get(`${this.baseURL}/ir/devices`);
     return response.data;

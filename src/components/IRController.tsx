@@ -62,6 +62,43 @@ const IRController: React.FC<IRControllerProps> = ({ refreshInterval = 3000 }) =
     }
   };
 
+  const handleColorSelect = async (color: string) => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await api.controlLamp('set_color', color);
+      console.log('Lamp color result:', result);
+      setLampOn(color !== 'off');
+      setCurrentColor(color);
+    } catch (error) {
+      console.error('Failed to set lamp color:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const syncFromServer = async () => {
+      try {
+        const state = await api.getSystemState();
+        const brgb = state?.brgb_state;
+        if (brgb) {
+          setLampOn(Boolean(brgb.on));
+          setCurrentColor(brgb.color || 'off');
+        }
+      } catch (error) {
+        console.error('Failed to sync BRGB state:', error);
+      }
+    };
+
+    syncFromServer();
+    const intervalId = setInterval(syncFromServer, refreshInterval);
+    return () => clearInterval(intervalId);
+  }, [refreshInterval]);
+
   const handlePower = () => {
     sendCommand('power');
   };
@@ -155,6 +192,9 @@ const IRController: React.FC<IRControllerProps> = ({ refreshInterval = 3000 }) =
               className={`color-dot ${currentColor === name ? 'active' : ''}`}
               style={{ backgroundColor: hex }}
               title={name}
+              onClick={() => handleColorSelect(name)}
+              role="button"
+              tabIndex={0}
             />
           ))}
       </div>
