@@ -62,6 +62,25 @@ const IRController: React.FC<IRControllerProps> = ({ refreshInterval = 3000 }) =
     }
   };
 
+  useEffect(() => {
+    const syncFromServer = async () => {
+      try {
+        const state = await api.getSystemState();
+        const brgb = state?.brgb_state;
+        if (brgb) {
+          setLampOn(Boolean(brgb.on));
+          setCurrentColor(brgb.color || 'off');
+        }
+      } catch (error) {
+        console.error('Failed to sync BRGB state:', error);
+      }
+    };
+
+    syncFromServer();
+    const intervalId = setInterval(syncFromServer, refreshInterval);
+    return () => clearInterval(intervalId);
+  }, [refreshInterval]);
+
   const handlePower = () => {
     sendCommand('power');
   };

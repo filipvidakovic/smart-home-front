@@ -20,6 +20,12 @@ export interface SystemState {
   security_armed: boolean;
   alarm_active: boolean;
   alarm_reason: string | null;
+  brgb_state?: {
+    on: boolean;
+    color: string;
+    color_index: number;
+    last_changed: number | null;
+  };
   timer_seconds: number;
   timer_running: boolean;
   timer_expired: boolean;
